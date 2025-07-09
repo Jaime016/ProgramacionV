@@ -1,4 +1,21 @@
-
+# Api Rest Biblioteca - JAIME MONTIEL
+## Versiones de las Herramientas Utilizadas
+```text
+| Herramienta         | Versión           |
+|---------------------|-------------------|
+| Python              | 3.12.x            |
+| Django              | 5.2.3             |
+| Django REST Framework| 3.16.0            |
+| psycopg2-binary     | 2.9.10            |
+| PostgreSQL          | 15.x              |
+| pip                 | (ver con `pip --version`) |
+| virtualenv          | (ver con `virtualenv --version`) |
+| pandas              | 2.3.0             |
+| matplotlib          | 3.10.3            |
+| seaborn             | 0.13.2            |
+| PyJWT               | 2.9.0             |
+| Visual Studio Code   | (versión instalada)|
+| Sistema Operativo    | Linux (especificar distribución y versión) |
 ```
 
 ## Instalar Python
