@@ -1,4 +1,19 @@
-# Api Rest Biblioteca - JAIME MONTIEL
+# Api Rest Biblioteca - Jaime Montiel
+Esta API RESTful permite gestionar una biblioteca digital con autenticación JWT. Los usuarios pueden registrar libros, autores, géneros y calificaciones, realizar operaciones CRUD, cargar datos de forma masiva y generar reportes gráficos automáticos.
+
+Funcionalidades clave:
+
+Registro y login con JWT
+
+Gestión de libros, autores, géneros y calificaciones
+
+Carga masiva desde Postman
+
+Exportación a CSV
+
+Reportes gráficos con pandas y matplotlib
+
+Recomendaciones de libros por género desde consola
 ## Versiones de las Herramientas Utilizadas
 ```text
 | Herramienta         | Versión           |
