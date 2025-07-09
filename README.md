@@ -1,4 +1,3 @@
-# Api Rest Biblioteca - Carlos Valenzuela
 ## Versiones de las Herramientas Utilizadas
 ```text
 | Herramienta         | Versión           |
@@ -53,9 +52,13 @@ pip install -r requirements.txt
 
 ## Crear un nuevo proyecto Django
 ```bash
-django-admin startproject biblioteca
-cd biblioteca
-python manage.py startapp libros
+django-admin startproject login_project
+cd login_project
+```
+## Creación de las aplicaciones
+```bash
+python manage.py startapp users     # Para autenticación y usuarios
+python manage.py startapp libros    # Para libros, autores, géneros, calificaciones
 ```
 
 ## Crear la base de datos
@@ -64,8 +67,8 @@ En PGAdmin crear la base de datos Biblioteca y se configura la conexion a la bas
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'biblioteca',
-        'USER': 'postgres',
+        'NAME': 'login_project_db',
+        'USER': 'login_user',
         'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -73,81 +76,91 @@ DATABASES = {
 }
 ```
 # ¿Cómo funciona la aplicación?
-La aplicación Biblioteca es una API RESTful que permite a los usuarios gestionar libros, autores y géneros, así como calificar libros y analizar los datos registrados. Está construida con Django y Django REST Framework, utilizando autenticación basada en JWT.
+## Autenticación y usuarios:
+Los usuarios pueden registrarse con un nombre de usuario y contraseña (/api/register/).
 
-🧩 Componentes principales:
-Usuarios registrados pueden:
+Luego, inician sesión para obtener un token JWT (/api/token/).
 
-- Autenticarse (login/registro).
-- Calificar libros (una sola vez por libro).
-- Consultar libros, autores y géneros.
+Ese token se usa para acceder a rutas protegidas (perfil, gestión de libros, etc.) enviándolo en los headers con Authorization: Bearer <token>.
 
-API protegida: los endpoints principales requieren autenticación JWT para acceder.
+## Gestión de libros:
 
-📊 Funciones adicionales:
-- Generación de reportes gráficos sobre calificaciones, tendencias de lectura y actividad de usuarios usando pandas, seaborn y matplotlib.
-- Recomendación interna de libros: por medio de un comando de consola, se pueden listar los libros mejor calificados por género.
+La app libros permite crear, leer, actualizar y eliminar libros.
 
-## Prueba de la aplicacion
-Flujo de uso básico:
-- El usuario se registra (/app/registrarse/) e inicia sesión (/app/iniciarsesion/).
-- Obtiene un token JWT para autenticarse.
-Usa ese token para:
-- Consultar libros (GET /app/libros/)
-- Calificar un libro (POST /app/calificaciones/)
-- Ver calificaciones propias o generales
-Desde consola, el administrador puede:
-- Generar gráficos: python manage.py reportes
-- Obtener recomendaciones: python manage.py libros_por_genero
+Cada libro está relacionado con un autor, un género y puede tener calificaciones.
+
+Se puede cargar libros de a uno o en carga masiva (varios libros desde un JSON en Postman).
+
+## Base de datos:
+
+Se usa PostgreSQL para almacenar usuarios, libros, autores, géneros y calificaciones.
+
+Los modelos están definidos para guardar las relaciones y atributos.
+
+## Análisis y reportes:
+
+Se exportan los datos de libros y calificaciones a CSV.
+
+Un script externo usa pandas y matplotlib para generar gráficos (promedio de calificaciones, distribución de géneros, libros por autor, etc.).
+
+Estos gráficos se guardan como imágenes en una carpeta graficos/ para análisis visual.
+
+## En uso cotidiano:
+Un usuario se registra y loguea.
+
+Puede ver o modificar libros (si tiene permisos).
+
+Se cargan datos masivamente para acelerar el proceso.
+
+Los administradores o analistas pueden correr el script para obtener reportes gráficos automáticos que resumen el estado de la colección y calificaciones.
 
 ## Postman
 ### Registrarse
 ```http
-POST http://127.0.0.1:8000/app/registrarse/
+GET http://127.0.0.1:8000/api/register/
 ```
 Json:
 ```json
 {
-  "username": "carlosvalenzuela",
-  "email": "Carloavalenzuela@gmail.com",
-  "password": "1234"
+  "username": "Jaime",
+  "password": "12345678"
 }
 ```
-![Image](https://github.com/user-attachments/assets/9a66e296-ab94-4083-a883-281ce2631021)
+![image](https://github.com/user-attachments/assets/352a4fba-f7af-4d46-9a22-f5a07cd91060)
 
-## Iniciar Sesion
+## Token
 ```http
-POST http://127.0.0.1:8000/app/iniciarsesion/
+POST http://127.0.0.1:8000/api/token/ 
 ```
 Json:
 ```json
 {
-  "username": "carlosvalenzuela",
-  "password": "1234"
+    "username": "Jaime",
+    "password": "12345678"
 }
 ```
-![Image](https://github.com/user-attachments/assets/287e0c05-58de-4ca1-a32f-618c520f3c30)
+![image](https://github.com/user-attachments/assets/f24bc998-884b-49c8-b0dd-cafc1e069e7f)
 
 ## Libros
 ### Listar Todos los Libros
 ```http
-GET http://127.0.0.1:8000/app/libros/
+GET http://127.0.0.1:8000/api/libros/
 ```
 Para acceder a los endpoints protegidos, enviá el token en el header:
 ```bash
 Authorization: Bearer <token>
 ```
-![Image](https://github.com/user-attachments/assets/5ecfbbe7-7772-4c19-bfac-a5ef6b1471ff)
+![image](https://github.com/user-attachments/assets/68b2aabd-388d-4157-b402-88e609b6d7c9)
 
 ### Obtener por ID
 ```http
-GET http://127.0.0.1:8000/app/libros/1/
+GET http://127.0.0.1:8000/api/libros/10/
 ```
 Para acceder a los endpoints protegidos, enviá el token en el header:
 ```bash
 Authorization: Bearer <token>
 ```
-![Image](https://github.com/user-attachments/assets/09635cf6-c552-486b-a4e1-0d3b2d60e24a)
+![image](https://github.com/user-attachments/assets/2d379ab9-2c28-4ff9-adb1-911a651fada5)
 
 ### Insertar
 ```http
@@ -156,45 +169,45 @@ POST http://127.0.0.1:8000/app/libros/
 Json:
 ```json
 {
-  "nombre": "La invención de Morel",
-  "autor": 6,
-  "genero": 1,
-  "lanzamiento": "1940-01-01",
-  "isbn": "9789871138766",
-  "url_libro": "http://libros.com/La_invencionn_de_Morel"
+    "numero": 0,
+    "id": 10,
+    "titulo": "Luces y sombras",
+    "autor": 20,
+    "genero": 6,
+    "calificacion": 3
 }
 ```
 Para acceder a los endpoints protegidos, enviá el token en el header:
 ```bash
 Authorization: Bearer <token>
 ```
-![Image](https://github.com/user-attachments/assets/c16df321-e11c-431f-a9d0-96e84c11f763)
+![image](https://github.com/user-attachments/assets/99bead0a-302c-424d-9222-197a52ac7007)
 
 ### Actualizar
 ```http
-PUT http://127.0.0.1:8000/app/libros/31/
+PUT http://127.0.0.1:8000/api/libros/10/
 ```
 Se pasa el ID del libro en la URL.
 Json:
 ```json
 {
-  "nombre": "Ficciones",
-  "autor": 6,
-  "genero": 3,
-  "lanzamiento": "1944-01-01",
-  "isbn": "9788491050084",
-  "url_libro": "https://libro.com/Ficciones"
+    "numero": 0,
+    "id": 10,
+    "titulo": "Luces y sombras",
+    "autor": 22,
+    "genero": 6,
+    "calificacion": 2
 }
 ```
 Para acceder a los endpoints protegidos, enviá el token en el header:
 ```bash
 Authorization: Bearer <token>
 ```
-![Image](https://github.com/user-attachments/assets/b17d7d48-d5b6-4847-bfba-efafc96b3437)
+![image](https://github.com/user-attachments/assets/d1e60c45-f435-4778-a9d4-aec52dba3581)
 
 ### Eliminar
 ```http
-DELETE http://127.0.0.1:8000/app/libros/31/
+DELETE http://127.0.0.1:8000/api/libros/10/
 ```
 Se pasa el ID del libro en la URL.
 
@@ -202,51 +215,54 @@ Para acceder a los endpoints protegidos, enviá el token en el header:
 ```bash
 Authorization: Bearer <token>
 ```
-![Image](https://github.com/user-attachments/assets/4706254c-6446-437e-b2bf-2de44561f1da)
+![image](https://github.com/user-attachments/assets/fdc48fae-beae-4957-b4c8-6a2eecb2f387)
+
 
 ## Codigo del View:
 Codigo para Listar todos y Insertar:
 ```python
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def libro_list_create(request):
-    if request.method == 'GET':
-        libros = Libro.objects.all()
-        serializer = LibroSerializer(libros, many=True)
-        return Response(serializer.data)
-    
-    elif request.method == 'POST':
-        serializer = LibroSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from rest_framework import viewsets
+from .models import Libro, Autor, Genero, Calificacion
+from .serializers import LibroSerializer, AutorSerializer, GeneroSerializer, CalificacionSerializer
+
+# Vista para Libros
+class LibroViewSet(viewsets.ModelViewSet):
+    queryset = Libro.objects.all()
+    serializer_class = LibroSerializer
+
+# Vista para Autores
+class AutorViewSet(viewsets.ModelViewSet):
+    queryset = Autor.objects.all()
+    serializer_class = AutorSerializer
+
+# Vista para Géneros
+class GeneroViewSet(viewsets.ModelViewSet):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
+
+# Vista para Calificaciones
+class CalificacionViewSet(viewsets.ModelViewSet):
+    queryset = Calificacion.objects.all()
+    serializer_class = CalificacionSerializer
 ```
 
 Codigo para obtener por id, actualizar y eliminar.
 ```python
-@api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
-def libro_detail(request, pk):
-    try:
-        libro = Libro.objects.get(pk=pk)
-    except Libro.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == 'GET':
-        serializer = LibroSerializer(libro)
-        return Response(serializer.data)
-    
-    elif request.method == 'PUT':
-        serializer = LibroSerializer(libro, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class LibroViewSet(viewsets.ModelViewSet):
+    queryset = Libro.objects.all()
+    serializer_class = LibroSerializer
 
-    elif request.method == 'DELETE':
-        libro.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # Obtener un libro por ID (ya incluido con GET /api/libros/<id>/)
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    # Actualizar libro por ID (ya incluido con PUT/PATCH)
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    # Eliminar libro por ID (ya incluido con DELETE)
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
 ```
 
 # Reportes gráficos automáticos
@@ -254,95 +270,69 @@ La aplicación incluye un comando personalizado para generar 10 reportes gráfic
 
 Cómo ejecutar el script
 Desde la terminal, ejecutar:
+
 ```bash
 python manage.py reportes
 ```
 Esto generará las gráficas en formato .png dentro de una carpeta reportes/ en la raíz del proyecto.
 
 ## Reportes generados
-### Calificación promedio por libro
-Archivo: 1_calificacion_promedio_por_libro.png
 
-Descripción: Muestra el promedio de calificaciones de cada libro con al menos una calificación. Ideal para analizar la recepción general de cada obra.
+```bash
+python manage.py reportes
+```
 
-Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/8f50018b-3d55-4471-8e57-84d81a5ed2fd)
+### UN PROMEDIO DE CALIFICACIONES POR LIBROS
+Archivo: promedio_calificaciones_por_autor.png
 
-### Libros por género
-Archivo: 2_libros_por_genero.png
-
-Descripción: Representa la cantidad total de libros agrupados por género. Útil para ver qué géneros dominan la colección.
+Descripción: Muestra un promedio de calificaciones por libros 
 
 Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/b5d93f34-71bc-4cff-89cd-c840c54cb5e9)
 
-### Libros con más calificaciones
-Archivo: 3_libros_con_mas_calificaciones.png
+![promedio_calificaciones_por_autor](https://github.com/user-attachments/assets/cd6f53bd-389c-4c1a-8655-5f36adadd8ee)
 
-Descripción: Lista los libros que han recibido más calificaciones. Refleja la popularidad o nivel de interacción de cada obra.
 
-Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/97834ecc-dfca-47f2-ac3c-4a5475101813)
+### UN PROMEDIO DE CALIFICACIONES POR LIBROS
+Archivo: numero_calificaciones_por_libro.png
 
-### Calificación promedio por género
-Archivo: 4_calificacion_promedio_genero.png
-
-Descripción: Calcula el promedio general de las calificaciones de libros por género. Ayuda a ver qué géneros son mejor valorados.
+Descripción: Muestra un numero de calificaciones por libros 
 
 Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/e7ef914f-342b-4813-95bc-f7d97dde95d1)
 
-### Usuarios con más calificaciones
-Archivo: 5_usuarios_con_mas_calificaciones.png
+![numero_calificaciones_por_libro](https://github.com/user-attachments/assets/fba060df-6253-49df-ad69-5711d927547a)
 
-Descripción: Muestra los usuarios que han calificado más libros. Permite identificar a los usuarios más activos.
+### TOP DE DISTRIBUCION DE GENERO
+Archivo: distribucion_generos_top10.png
 
-Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/041acd02-7436-42ff-85aa-3666ad139ac7)
-
-### Distribución de calificaciones
-Archivo: 6_distribucion_calificaciones.png
-
-Descripción: Histograma que muestra cómo se distribuyen las calificaciones (bajas, medias, altas).
+Descripción: Muestra las distribuciones de los generos 
 
 Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/63a1299c-884c-4192-ba79-4700e9436595)
 
-### Promedio por año de publicación
-Archivo: 7_promedio_por_año.png
+![distribucion_generos_top10](https://github.com/user-attachments/assets/16ac92a0-9c6b-43c2-8b23-df8eb6e4361a)
 
-Descripción: Muestra cómo varía el promedio de calificaciones según el año de lanzamiento de los libros.
 
-Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/eb5f2d53-39ca-4733-beee-3996ee17a0ec)
+### TOP DE CALIFICACIONES 
+Archivo: distribucion_calificaciones.png
 
-### Libros por autor
-Archivo: 8_libros_por_autor.png
-
-Descripción: Muestra cuántos libros ha publicado cada autor registrado.
+Descripción: muestra una distribuccion de calificaciones 
 
 Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/671c4ec8-9008-45a4-9433-bf31e559910d)
 
-### Top 5 libros mejor calificados
-Archivo: 9_top5_libros.png
+![distribucion_calificaciones](https://github.com/user-attachments/assets/aa8610c6-0229-430d-ac59-1dd9a9315ae0)
 
-Descripción: Muestra los 5 libros mejor valorados que tienen al menos 3 calificaciones.
 
-Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/0e73c1c4-42a5-4e1b-85ae-85b9e7fb1ab2)
+### TOP CALIFICACION POR AUTOR
+Archivo: cantidad_libros_por_autor.png
 
-### Boxplot de calificaciones por género
-Archivo: 10_boxplot_genero.png
-
-Descripción: Gráfico tipo caja (boxplot) que representa la dispersión y valores extremos de las calificaciones según el género.
+Descripción: Muestra la calificacion segun los autores
 
 Ejemplo visual:
-![Image](https://github.com/user-attachments/assets/d60d965c-8fba-4f79-8dd1-eb10ad5ff9c2)
+
+![cantidad_libros_por_autor](https://github.com/user-attachments/assets/0371149e-6b48-48e6-931c-d409ffd8fce7)
 
 
 ## Recomendaciones por Género
-Este proyecto incluye un comando personalizado que permite obtener una lista de los 10 libros mejor calificados dentro de un género específico.
+Este proyecto incluye un comando personalizado que permite obtener una lista de los libros mejor calificados dentro de un género específico.
 
 ### Archivo
 ```bash
@@ -350,24 +340,20 @@ libros/management/commands/libros_por_genero.py
 ```
 
 ### ¿Qué hace este script?
-- Solicita al usuario un ID de género por consola.
-- Filtra los libros que pertenecen a ese género.
-- Calcula el promedio de calificaciones de cada libro.
-- Ordena los libros de mayor a menor según ese promedio.
-- Muestra en consola los 10 libros con mejor valoración.
+-ejecuta un comando personalizado de Django definido en libros/management/commands/libros_por_genero.py.
+-Este comando realiza consultas a la base de datos y muestra en consola los libros mejor calificados por género.
+-Es útil para generar reportes o tareas administrativas directamente desde la terminal.
 
 ### Ejecución
 Para ejecutarlo, usá el siguiente comando:
 ```bash
-python manage.py libros_por_genero
+python manage.py recomendaciones
 ```
 Luego, el sistema te pedirá que ingreses un ID de género:
-```bash
-📥 Ingrese el ID del género: 3
-```
+
 Y el resultado se verá así:
 
-![Image](https://github.com/user-attachments/assets/e1918c98-d6b0-4960-abce-6c009d93553c)
+![image](https://github.com/user-attachments/assets/14338d8d-5ff0-4514-b469-1c088717f0d5)
 
 ### Validaciones
 Si se ingresa un ID que no es un número, muestra un error.
