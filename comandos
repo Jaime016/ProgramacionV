@@ -1,0 +1,21 @@
+from pathlib import Path
+
+# Contenido del archivo README.md con todos los comandos usados en el bash
+bash_commands_md = """
+# 🧪 Comandos Utilizados en el Proyecto Django
+
+Este documento resume todos los comandos ejecutados desde la terminal (bash) para desarrollar y mantener el proyecto Django.
+
+---
+
+## ⚙️ Gestión del Entorno Virtual
+
+```bash
+# Crear entorno virtual
+python3 -m venv env
+
+# Activar entorno virtual (Linux)
+source env/bin/activate
+
+# Instalar dependencias desde archivo
+pip install -r requirements.txt
