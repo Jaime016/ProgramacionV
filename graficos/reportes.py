@@ -31,6 +31,9 @@ plt.tight_layout()
 plt.savefig("graficos/promedio_calificaciones_por_genero.png", dpi=300)
 plt.close()
 
+# Exportar CSV
+promedio_genero.to_csv('graficos/promedio_calificaciones_por_genero.csv', header=['calificacion_promedio'])
+
 # 2. Cantidad de libros por autor
 libros_por_autor = df.groupby('autor').size().sort_values(ascending=False)
 plt.figure(figsize=(max(12, len(libros_por_autor)), 6))
@@ -47,6 +50,9 @@ sns.despine()
 plt.tight_layout()
 plt.savefig("graficos/cantidad_libros_por_autor.png", dpi=300)
 plt.close()
+
+# Exportar CSV
+libros_por_autor.to_csv('graficos/cantidad_libros_por_autor.csv', header=['cantidad'])
 
 # 3. Distribución de géneros (pastel) - Top 10
 generos = df['genero'].value_counts()
@@ -65,6 +71,9 @@ plt.tight_layout()
 plt.savefig("graficos/distribucion_generos_top10.png", dpi=300)
 plt.close()
 
+# Exportar CSV
+generos_top.to_csv('graficos/distribucion_generos_top10.csv', header=['cantidad'])
+
 # 4. Promedio de calificaciones por autor
 promedio_autor = df.groupby('autor')['calificacion_puntaje'].mean().sort_values(ascending=False)
 plt.figure(figsize=(max(12, len(promedio_autor)), 6))
@@ -81,6 +90,9 @@ sns.despine()
 plt.tight_layout()
 plt.savefig("graficos/promedio_calificaciones_por_autor.png", dpi=300)
 plt.close()
+
+# Exportar CSV
+promedio_autor.to_csv('graficos/promedio_calificaciones_por_autor.csv', header=['calificacion_promedio'])
 
 # 5. Número de calificaciones por libro (Top 20)
 calificaciones_por_libro = df.groupby('titulo').size().sort_values(ascending=False).head(20)
@@ -99,5 +111,7 @@ plt.tight_layout()
 plt.savefig("graficos/numero_calificaciones_por_libro.png", dpi=300)
 plt.close()
 
-print("¡Todos los gráficos fueron generados y guardados en la carpeta 'graficos/'!")
+# Exportar CSV
+calificaciones_por_libro.to_csv('graficos/numero_calificaciones_por_libro.csv', header=['cantidad'])
 
+print("¡Todos los gráficos y archivos CSV fueron generados y guardados en la carpeta 'graficos/'!")
