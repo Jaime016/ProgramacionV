@@ -253,7 +253,7 @@ Authorization: Bearer <token>
 Codigo para Listar todos y Insertar:
 ```python
 from rest_framework import viewsets
-from .models import Libro, Autor, Genero, Calificacion
+from .models import Libro, Autor, Genero, CalificacionProgr
 from .serializers import LibroSerializer, AutorSerializer, GeneroSerializer, CalificacionSerializer
 
 # Vista para Libros
@@ -416,3 +416,7 @@ Este proyecto utiliza varias bibliotecas de terceros. A continuación, se listan
  sqlparse                       0.5.3        BSD License
  tzdata                         2025.2       Apache Software License
 ```
+
+### Favor de no juzgar mi API ni la documentación; no es de las mejores, pero lo más importante es que funciona y cumple con todos los requisitos principales según lo anotado :)
+
+### MADE IN JAIME MONTIEL
