@@ -369,7 +369,7 @@ Luego, el sistema te pedirá que ingreses un ID de género:
 
 Y el resultado se verá así:
 
-![image](https://github.com/user-attachments/assets/14338d8d-5ff0-4514-b469-1c088717f0d5)
+<img width="585" height="227" alt="image" src="https://github.com/user-attachments/assets/ec129866-0673-4402-8ada-4b6e9a9e9c17" />
 
 ### Validaciones
 Si se ingresa un ID que no es un número, muestra un error.
