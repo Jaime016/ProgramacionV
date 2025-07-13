@@ -1,4 +1,36 @@
 # Api Rest Biblioteca - Jaime Montiel
+
+# Versiones de las Herramientas Utilizadas
+```bash
+python -m pip list
+```
+
+```bash
+Package         Version
+--------------- -----------
+asgiref         3.9.1
+contourpy       1.3.2
+cycler          0.12.1
+Django          5.2.4
+fonttools       4.58.5
+kiwisolver      1.4.8
+matplotlib      3.10.3
+numpy           2.3.1
+packaging       25.0
+pandas          2.3.1
+pillow          11.3.0
+pip             24.0
+pyparsing       3.2.3
+python-dateutil 2.9.0.post0
+pytz            2025.2
+seaborn         0.13.2
+six             1.17.0
+sqlparse        0.5.3
+tzdata          2025.2
+```
+
+## Pequeño resumen de lo que hace la Api Rest Biblioteca
+
 Esta API RESTful permite gestionar una biblioteca digital con autenticación JWT. Los usuarios pueden registrar libros, autores, géneros y calificaciones, realizar operaciones CRUD, cargar datos de forma masiva y generar reportes gráficos automáticos.
 
 Funcionalidades clave:
@@ -14,41 +46,7 @@ Exportación a CSV
 Reportes gráficos con pandas y matplotlib
 
 Recomendaciones de libros por género desde consola
-## Versiones de las Herramientas Utilizadas
-```text
-=======
-=======
->>>>>>> Stashed changes
-# 📚 API REST - Biblioteca
-
-Este proyecto implementa una API RESTful para la gestión de libros, autores, géneros y calificaciones, incluyendo autenticación con JWT, carga masiva de datos y generación automática de reportes gráficos.
-
----
-
-# Versiones de las Herramientas Utilizadas
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-| Herramienta         | Versión           |
-|---------------------|-------------------|
-| Python              | 3.12.x            |
-| Django              | 5.2.3             |
-| Django REST Framework| 3.16.0            |
-| psycopg2-binary     | 2.9.10            |
-| PostgreSQL          | 15.x              |
-| pip                 | (ver con `pip --version`) |
-| virtualenv          | (ver con `virtualenv --version`) |
-| pandas              | 2.3.0             |
-| matplotlib          | 3.10.3            |
-| seaborn             | 0.13.2            |
-| PyJWT               | 2.9.0             |
-| Visual Studio Code   | (versión instalada)|
-| Sistema Operativo    | Linux (especificar distribución y versión) |
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-```
+- - - - - 
 
 ## Instalar Python
 Asegurate de tener Python instalado. Recomendado: Python 3.10 o superior
