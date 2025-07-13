@@ -288,14 +288,14 @@ Cómo ejecutar el script
 Desde la terminal, ejecutar:
 
 ```bash
-python manage.py reportes
+python3 manage.py reportes
 ```
 Esto generará las gráficas en formato .png dentro de una carpeta reportes/ en la raíz del proyecto.
 
 ## Reportes generados
 
 ```bash
-python manage.py reportes
+python3 graficos/reportes.py
 ```
 
 ### UN PROMEDIO DE CALIFICACIONES POR LIBROS
