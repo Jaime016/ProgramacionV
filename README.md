@@ -367,31 +367,27 @@ Ejemplo visual:
 ## Recomendaciones por Género
 Este proyecto incluye un comando personalizado que permite obtener una lista de los libros mejor calificados dentro de un género específico.
 
-### Archivo
-```bash
-libros/management/commands/libros_por_genero.py
-```
-
-### ¿Qué hace este script?
--ejecuta un comando personalizado de Django definido en libros/management/commands/libros_por_genero.py.
--Este comando realiza consultas a la base de datos y muestra en consola los libros mejor calificados por género.
--Es útil para generar reportes o tareas administrativas directamente desde la terminal.
-
 ### Ejecución
 Para ejecutarlo, usá el siguiente comando:
 ```bash
 python manage.py recomendaciones
 ```
-Luego, el sistema te pedirá que ingreses un ID de género:
+### ¿Qué hace este script?
+## Función principal:
+Muestra los 5 libros con mejor calificación para cada género.
+
+## Cómo lo hace:
+Calcula el promedio de calificaciones de los libros dentro de cada género y muestra los que tienen los promedios más altos.
+
+## Dónde se ve el resultado:
+El resultado se imprime directamente en la terminal.
+
+## Ubicación del script:
+libros/management/commands/recomendaciones.py
 
 Y el resultado se verá así:
 
 <img width="585" height="227" alt="image" src="https://github.com/user-attachments/assets/ec129866-0673-4402-8ada-4b6e9a9e9c17" />
-
-### Validaciones
-Si se ingresa un ID que no es un número, muestra un error.
-
-Si no se encuentran libros para ese género, informa al usuario con una advertencia.
 
 # Licencia
 Este proyecto está licenciado bajo los términos de la Licencia MIT.
