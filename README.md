@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Api Rest Biblioteca - Jaime Montiel
 Esta API RESTful permite gestionar una biblioteca digital con autenticación JWT. Los usuarios pueden registrar libros, autores, géneros y calificaciones, realizar operaciones CRUD, cargar datos de forma masiva y generar reportes gráficos automáticos.
 
@@ -18,6 +19,8 @@ Recomendaciones de libros por género desde consola
 ## Versiones de las Herramientas Utilizadas
 ```text
 =======
+=======
+>>>>>>> Stashed changes
 # 📚 API REST - Biblioteca
 
 Este proyecto implementa una API RESTful para la gestión de libros, autores, géneros y calificaciones, incluyendo autenticación con JWT, carga masiva de datos y generación automática de reportes gráficos.
@@ -26,6 +29,9 @@ Este proyecto implementa una API RESTful para la gestión de libros, autores, g�
 
 # Versiones de las Herramientas Utilizadas
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 | Herramienta         | Versión           |
 |---------------------|-------------------|
@@ -42,6 +48,7 @@ Este proyecto implementa una API RESTful para la gestión de libros, autores, g�
 | PyJWT               | 2.9.0             |
 | Visual Studio Code   | (versión instalada)|
 | Sistema Operativo    | Linux (especificar distribución y versión) |
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 ```
 
@@ -418,6 +425,8 @@ Este proyecto utiliza varias bibliotecas de terceros. A continuación, se listan
  tzdata                         2025.2       Apache Software License
 ```
 =======
+=======
+>>>>>>> Stashed changes
 
 ---
 
@@ -427,5 +436,8 @@ Este proyecto utiliza varias bibliotecas de terceros. A continuación, se listan
   ```bash
   python --version
 
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 # JaimeM
+=======
+>>>>>>> Stashed changes
