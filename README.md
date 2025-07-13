@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 # Api Rest Biblioteca - Jaime Montiel
 Esta API RESTful permite gestionar una biblioteca digital con autenticación JWT. Los usuarios pueden registrar libros, autores, géneros y calificaciones, realizar operaciones CRUD, cargar datos de forma masiva y generar reportes gráficos automáticos.
 
@@ -424,20 +422,3 @@ Este proyecto utiliza varias bibliotecas de terceros. A continuación, se listan
  sqlparse                       0.5.3        BSD License
  tzdata                         2025.2       Apache Software License
 ```
-=======
-=======
->>>>>>> Stashed changes
-
----
-
-## Cómo obtener las versiones
-
-- **Python:**  
-  ```bash
-  python --version
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-# JaimeM
-=======
->>>>>>> Stashed changes
